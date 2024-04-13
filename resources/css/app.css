@@ -1,0 +1,44 @@
+#calendar {
+   width: 90%;
+   max-width: 600px;
+   height: 400px;
+   overflow: auto;
+   font-size: 14px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.text {
+   color: white;
+   text-align: center;
+}
+
+.header {
+   margin-top: 40px;
+   margin-left: 40px;
+   margin-right: 40px;
+   background-color: #343a40;
+   border-radius: 10px; 
+   min-height: 100px; 
+}
+
+.text {
+   color: white;
+  
+}
+
+
+.d-flex {
+   display: flex;
+}
+
+.align-items-center {
+   align-items: center;
+}
+
+.background {
+    background-color:black;
+}
+
+
+

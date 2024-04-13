@@ -8,27 +8,33 @@
     <meta name="author" content="">
 
     <title>@yield('title', 'Grand Col')</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
         integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
         integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous">
     </script>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+
     <style>
-
-
     </style>
 </head>
 
-<body style="background-color: black;">
-    <div class="jumbotron mx-5 mt-3" style="background-color: #343a40; text-align: center;">
-        <h1 class="text-white">Le Gite du Grand Col</h1>
+
+
+<body class="background">
+    <div class=" header  <div class="header d-flex align-items-center">">
+        <h1 class="text">Le Gite du Grand Col</h1>
     </div>
     <nav class="navbar mx-5 navbar-toggleable-md navbar-inverse navbar-dark" style="background-color: black;">
         <div class="container justify-content-center">
             <ul class="nav navbar-nav nav-fill">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Le Gite</a>
+                    <a class="nav-link" href="{{ route('home') }}">Le Gite</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Chambre 1</a>
@@ -43,7 +49,7 @@
                     <a class="nav-link" href="#">Tarifs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Disponibilites</a>
+                    <a class="nav-link" href="{{ route('calendar') }}">Disponibilites</a>
                 </li>
             </ul>
 
@@ -64,18 +70,6 @@
             </div>
         </div>
     </nav>
-
-    <style>
-        .navbar-nav .nav-item.active>.nav-link {
-            font-weight: bold;
-            font-size: 1.2em;
-            /* Taille de police pour l'élément actif */
-        }
-    </style>
-
-
-
-
     <div class="container">
         <main role="main">
 

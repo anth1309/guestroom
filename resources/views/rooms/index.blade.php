@@ -4,6 +4,7 @@
 
 
 @section('content')
+
     <div class="text-center ">
         <h1 class="text-white  mt-3">Bienvenue au Gîte Le Grand Col !</h1>
         <p class="text-white  mt-3">
