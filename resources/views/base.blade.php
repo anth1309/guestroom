@@ -24,11 +24,11 @@
     </style>
 </head>
 
-
-
 <body class="background">
-    <div class=" header  <div class="header d-flex align-items-center">">
-        <h1 class="text">Le Gite du Grand Col</h1>
+    <div class="header bg-div">
+        <div class="header d-flex align-items-center">
+            <h1 class="text">Le Gite du Grand Col</h1>
+        </div>
     </div>
     <nav class="navbar mx-5 navbar-toggleable-md navbar-inverse navbar-dark" style="background-color: black;">
         <div class="container justify-content-center">
@@ -36,15 +36,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">Le Gite</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Chambre 1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Chambre 2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Chambre 3</a>
-                </li>
+                @yield('navbar')
+
                 <li class="nav-item">
                     <a class="nav-link" href="#">Tarifs</a>
                 </li>
@@ -72,12 +65,9 @@
     </nav>
     <div class="container">
         <main role="main">
-
             @yield('content')
         </main>
-
     </div>
-
 </body>
 
 </html>

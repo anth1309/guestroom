@@ -13,19 +13,22 @@
    text-align: center;
 }
 
+.bg-div {
+   background-color: #343a40;
+   border-radius: 10px; 
+   color: white; 
+}
+
 .header {
    margin-top: 40px;
    margin-left: 40px;
    margin-right: 40px;
-   background-color: #343a40;
-   border-radius: 10px; 
+  
    min-height: 100px; 
 }
-
-.text {
-   color: white;
+/* .text {
   
-}
+} */
 
 
 .d-flex {
@@ -42,3 +45,19 @@
 
 
 
+.fc-day {
+   background-color: #343a40;
+}
+
+.fc-day-mon .fc-daygrid-day-top {
+   position: relative;
+}
+
+.fc-day-mon .fc-daygrid-day-top::before {
+   content: "Fermé";
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: red;
+}

@@ -4,7 +4,11 @@
 
 
 @section('content')
-
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="text-center ">
         <h1 class="text-white  mt-3">Bienvenue au Gîte Le Grand Col !</h1>
         <p class="text-white  mt-3">
@@ -40,4 +44,13 @@
             Nouvelle-Calédonie, où chaque instant est une invitation à explorer, à rêver et à s'émerveiller.</p>
     </div>
 
+@endsection
+@section('navbar')
+    <ul class="nav">
+        @foreach ($rooms as $room)
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('room', $room->id) }}">{{ $room->name }}</a>
+            </li>
+        @endforeach
+    </ul>
 @endsection
