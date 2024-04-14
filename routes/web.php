@@ -11,10 +11,12 @@ Route::get('/', function () {
 
 Route::get('/room/{id}', function ($id) {
     $room = Room::findOrFail($id);
-    // dd($room);
     return view('rooms.room', compact('room'));
 })->name('room');
 
+
+
+Route::get('/get-reservations', [ReservationController::class, 'getReservations']);
 
 
 Route::get('/calendar', function () {

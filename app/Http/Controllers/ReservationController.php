@@ -3,10 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
+
+    public function getReservations(Request $request)
+    {
+        $reservations = Reservation::all();
+        $events = [];
+        foreach ($reservations as $reservation) {
+            $roomName = Room::find($reservation->room_id)->name;
+            $startDate = Carbon::parse($reservation->start_date);
+            $endDate = Carbon::parse($reservation->end_date);
+
+            while ($startDate <= $endDate) {
+                $events[] = [
+                    'title' => $roomName,
+                    'start' => $startDate->toDateString(),
+                    'end' => $startDate->toDateString(),
+                    'roomName' => $roomName,
+                ];
+                $startDate->addDay();
+            }
+        }
+
+        return response()->json($events);
+    }
+
     public function index()
     {
         $reservations = Reservation::all();
@@ -32,12 +58,23 @@ class ReservationController extends Controller
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);
 
+        $reservation = Reservation::create($request->all());
 
-        Reservation::create($request->all());
+        $events = Reservation::all()->map(function ($reservation) {
+            $name = Room::find($reservation->room_id)->name;
+            return [
+                'title' => $name,
+                'start' => $reservation->start_date,
+                'end' => $reservation->end_date,
+            ];
+        });
 
-        return redirect()->route('home')
-            ->with('success', 'Votre réservation a été enregistrée avec succès.Veuillez vérifier vos courriels.Merci');
+        // session()->put('event', $event);
+        session()->put('events', $events);
+        return redirect()->route('home')->with('success', 'Votre réservation a été enregistrée avec succès.');
     }
+
+
 
 
 

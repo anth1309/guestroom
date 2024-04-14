@@ -9,6 +9,7 @@
         <form action="{{ route('reservations.store') }}" method="POST">
             @csrf
             <input type="hidden" name="room_id" value="{{ $roomId }}">
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
