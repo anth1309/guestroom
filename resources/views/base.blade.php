@@ -27,7 +27,7 @@
 <body class="background">
     <div class="header bg-div">
         <div class="header d-flex align-items-center">
-            <h1 class="text">Le Gite du Grand Col</h1>
+            <h1 class="text">Le Gîte du Grand Col</h1>
         </div>
     </div>
     <nav class="navbar mx-5 navbar-toggleable-md navbar-inverse navbar-dark" style="background-color: black;">
@@ -39,7 +39,8 @@
                 @yield('navbar')
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tarifs</a>
+                    <a class="nav-link" href="{{ route('price') }}">Tarifs</a>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('calendar') }}">Disponibilites</a>

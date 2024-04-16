@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReservationMail;
+use App\Mail\TestMail;
 use App\Models\Reservation;
 use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -19,7 +22,7 @@ class ReservationController extends Controller
             $startDate = Carbon::parse($reservation->start_date);
             $endDate = Carbon::parse($reservation->end_date);
 
-            while ($startDate <= $endDate) {
+            while ($startDate < $endDate) {
                 $events[] = [
                     'title' => $roomName,
                     'start' => $startDate->toDateString(),
@@ -69,8 +72,12 @@ class ReservationController extends Controller
             ];
         });
 
-        // session()->put('event', $event);
         session()->put('events', $events);
+        $mail = $reservation->email;
+        // Mail::to('destinataire@example.com')->send(new TestMail());
+        Mail::to($mail)->send(new ReservationMail($reservation));
+
+
         return redirect()->route('home')->with('success', 'Votre réservation a été enregistrée avec succès.');
     }
 

@@ -9,12 +9,16 @@ Route::get('/', function () {
     return view('home.index', compact('rooms'));
 })->name('home');
 
+
+Route::get('/price', function () {
+    return view('rooms.price');
+})->name('price');
+
+
 Route::get('/room/{id}', function ($id) {
     $room = Room::findOrFail($id);
     return view('rooms.room', compact('room'));
 })->name('room');
-
-
 
 Route::get('/get-reservations', [ReservationController::class, 'getReservations']);
 

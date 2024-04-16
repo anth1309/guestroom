@@ -1,6 +1,4 @@
-.fc-title-room {
-   color: red !important; 
-}
+
 #calendar {
    width: 90%;
    max-width: 600px;
@@ -16,6 +14,7 @@
    text-align: center;
 }
 
+
 .bg-div {
    background-color: #343a40;
    border-radius: 10px; 
@@ -26,12 +25,9 @@
    margin-top: 40px;
    margin-left: 40px;
    margin-right: 40px;
-  
+   text-align: center!important; 
    min-height: 100px; 
 }
-/* .text {
-  
-} */
 
 
 .d-flex {
@@ -45,8 +41,6 @@
 .background {
     background-color:black;
 }
-
-
 
 .fc-day {
    background-color: #343a40;

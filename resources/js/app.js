@@ -1,4 +1,7 @@
 import './bootstrap';
+import './reservation.js';
+import './price.js';
+
 
 document.addEventListener('DOMContentLoaded', function() {
    const calendarEl = document.getElementById('calendar');
@@ -17,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         startTime: '00:00', 
         endTime: '24:00', 
     },
+
     events: '/get-reservations', 
     editable: true, 
     eventDrop: function(info) {
