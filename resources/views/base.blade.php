@@ -59,14 +59,12 @@
                                 @yield('navbar')
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="">Gestion des
+                                    <a class="nav-link" href="{{ route('rooms.index') }}">Gestion des
                                         chambres</a>
-                                    {{-- <a class="nav-link" href="{{ route('room-management') }}">Gestion des chambres</a> --}}
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('reservations.index') }}">Gestion des
                                         réservations</a>
-                                    {{-- <a class="nav-link" href="{{ route('reservation-management') }}">Gestion des réservations</a> --}}
                                 </li>
                             </ul>
                         </div>

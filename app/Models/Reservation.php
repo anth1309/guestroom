@@ -17,6 +17,10 @@ class Reservation extends Model
         'email',
         'phone',
         'comment',
+        'adults',
+        'children',
+        'bed',
+        'price'
     ];
 
     public function room()

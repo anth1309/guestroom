@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\RoomController;
 use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 
@@ -44,8 +45,14 @@ Route::delete('/logout', [LoginController::class, 'logout'])->name('logout');
 //route Crud une fois loggé
 Route::middleware('auth')->group(function () {
     Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
-    Route::get('/reservations/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
-    Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
-    Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
-    Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+    Route::get('/reservations/{room}', [ReservationController::class, 'show'])->name('reservations.show');
+    Route::get('/reservations/{room}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
+    Route::put('/reservations/{room}', [ReservationController::class, 'update'])->name('reservations.update');
+    Route::delete('/reservations/{room}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+
+    Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
+    Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
+    Route::get('/rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
+    Route::put('/rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
+    Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
 });
