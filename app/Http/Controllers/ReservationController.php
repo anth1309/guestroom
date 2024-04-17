@@ -8,6 +8,7 @@ use App\Models\Reservation;
 use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
@@ -59,31 +60,38 @@ class ReservationController extends Controller
             'phone' => 'required|string|max:20',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
+            'comment' => 'nullable|string|max:255',
+            'adults' => 'required|integer|min:1',
+            'children' => 'required|integer|min:0',
+            'bed' => 'required|boolean',
         ]);
 
-        $reservation = Reservation::create($request->all());
-
-        $events = Reservation::all()->map(function ($reservation) {
-            $name = Room::find($reservation->room_id)->name;
-            return [
-                'title' => $name,
-                'start' => $reservation->start_date,
-                'end' => $reservation->end_date,
-            ];
-        });
-
-        session()->put('events', $events);
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        $reservationId = DB::table('reservations')->insertGetId([
+            'room_id' => $request->room_id,
+            'lastname' => $request->lastname,
+            'firstname' => $request->firstname,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'comment' => $request->comment,
+            'adult' => $request->adults,
+            'children' => $request->children,
+            'bed' => $request->bed,
+            'price' => 10, // Prix fixe de 10
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        $reservationNumber = $currentYear . '-' . $currentMonth . '-' . $reservationId;
+        DB::table('reservations')->where('id', $reservationId)->update(['reservation_number' => $reservationNumber]);
+        $reservation = Reservation::findOrFail($reservationId);
         $mail = $reservation->email;
-        // Mail::to('destinataire@example.com')->send(new TestMail());
         Mail::to($mail)->send(new ReservationMail($reservation));
-
 
         return redirect()->route('home')->with('success', 'Votre réservation a été enregistrée avec succès.');
     }
-
-
-
-
 
     public function show($id)
     {

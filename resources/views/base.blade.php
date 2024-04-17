@@ -32,36 +32,56 @@
     </div>
     <nav class="navbar mx-5 navbar-toggleable-md navbar-inverse navbar-dark" style="background-color: black;">
         <div class="container justify-content-center">
-            <ul class="nav navbar-nav nav-fill">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">Le Gite</a>
-                </li>
-                @yield('navbar')
+            @if (!Auth::check())
+                <ul class="nav navbar-nav nav-fill">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">Le Gite</a>
+                    </li>
+                    @yield('navbar')
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('price') }}">Tarifs</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('price') }}">Tarifs</a>
 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('calendar') }}">Disponibilites</a>
-                </li>
-            </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('calendar') }}">Disponibilites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link">Se connecter</a>
+                    </li>
+                </ul>
+            @else
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
 
-            <div class="navbar-nav ms-auto mb2 mb-lg-0">
-                @auth
-                    Bienvenue {{ Auth::user()->name }}
-                    <form action="" class="nav-item mr-3 ml-3" method="POST">
-                        @method('delete')
-                        @csrf
-                        <button>Se deconnecter</button>
-                    </form>
-                @endauth
-                @guest
-                    <div class="nav-item mr-3">
-                        <a href="" class="nav-link">Se connecter</a>
+                            <ul class="nav navbar-nav nav-fill justify-content-start">
+                                @yield('navbar')
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="">Gestion des
+                                        chambres</a>
+                                    {{-- <a class="nav-link" href="{{ route('room-management') }}">Gestion des chambres</a> --}}
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('reservations.index') }}">Gestion des
+                                        réservations</a>
+                                    {{-- <a class="nav-link" href="{{ route('reservation-management') }}">Gestion des réservations</a> --}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-auto">
+
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-link">Se déconnecter</button>
+                            </form>
+                        </div>
                     </div>
-                @endguest
-            </div>
+                </div>
+            @endif
+
         </div>
     </nav>
     <div class="container">

@@ -21,6 +21,12 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->text('comment')->nullable();
+            $table->string('reservation_number')->nullable();
+
+            $table->integer('price');
+            $table->boolean('bed');
+            $table->integer('adult');
+            $table->integer('children');
             $table->timestamps();
         });
     }
