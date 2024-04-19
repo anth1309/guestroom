@@ -10,11 +10,12 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ReservationMail extends Mailable
+class NewReservationMail extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $reservation;
-    public $subject = 'Votre réservation au "Grand Col"';
+    public $subject = 'Nouvelle réservation';
     /**
      * Create a new message instance.
      */
@@ -28,6 +29,7 @@ class ReservationMail extends Mailable
     {
         $this->subject = $subject;
     }
+
     /**
      * Get the message envelope.
      */
@@ -44,7 +46,7 @@ class ReservationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.reservation',
+            view: 'mails.mail-reservation-admin',
         );
     }
 

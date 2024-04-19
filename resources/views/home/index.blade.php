@@ -43,14 +43,37 @@
             de la
             Nouvelle-Calédonie, où chaque instant est une invitation à explorer, à rêver et à s'émerveiller.</p>
     </div>
+    <div>
+        @if ($images->isNotEmpty())
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach ($images as $key => $image)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                            <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-75 mx-auto"
+                                alt="Image du gite">
+                        </div>
+                    @endforeach
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Précédent</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Suivant</span>
+                </a>
+            </div>
+        @else
+            <p>Aucune image disponible pour cette chambre.</p>
+        @endif
 
-@endsection
-@section('navbar')
-    <ul class="nav">
-        @foreach ($rooms as $room)
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('room', $room->id) }}">{{ $room->name }}</a>
-            </li>
-        @endforeach
-    </ul>
-@endsection
+    @endsection
+    @section('navbar')
+        <ul class="nav">
+            @foreach ($rooms as $room)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('room', $room->id) }}">{{ $room->name }}</a>
+                </li>
+            @endforeach
+        </ul>
+    @endsection

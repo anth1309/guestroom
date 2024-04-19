@@ -25,7 +25,7 @@
 </head>
 
 <body class="background">
-    <div class="header bg-div">
+    <div class="container bg-div">
         <div class="header d-flex align-items-center">
             <h1 class="text">Le Gîte du Grand Col</h1>
         </div>
@@ -35,7 +35,7 @@
             @if (!Auth::check())
                 <ul class="nav navbar-nav nav-fill">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Le Gite</a>
+                        <a class="nav-link" href="{{ route('home') }}">Accueil</a>
                     </li>
                     @yield('navbar')
 
@@ -49,6 +49,7 @@
                     <li class="nav-item">
                         <a href="{{ route('login') }}" class="nav-link">Se connecter</a>
                     </li>
+
                 </ul>
             @else
                 <div class="container">

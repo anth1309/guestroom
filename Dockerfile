@@ -10,9 +10,18 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 WORKDIR /var/www/html
 
-COPY . /var/www/html
 RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html
+
+
+COPY . .
 
 RUN composer install --no-interaction
 
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]
+
+
 EXPOSE 9000
+

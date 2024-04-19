@@ -25,7 +25,7 @@
    margin-top: 40px;
    margin-left: 40px;
    margin-right: 40px;
-   text-align: center!important; 
+   justify-content: center;
    min-height: 100px; 
 }
 
@@ -42,6 +42,8 @@
     background-color:black;
 }
 
+
+/* calendar */
 .fc-day {
    background-color: #343a40;
 }
@@ -60,3 +62,17 @@
 }
 
 
+
+/* caroussel */
+.carousel-control-prev, .carousel-control-next {
+   opacity: 0;
+   transition: opacity 0.3s ease;
+}
+
+.carousel:hover .carousel-control-prev, .carousel:hover .carousel-control-next {
+   opacity: 0.3;
+}
+
+.carousel:not(:hover) .carousel-control-prev, .carousel:not(:hover) .carousel-control-next {
+   display: none;
+}

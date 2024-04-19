@@ -11,8 +11,6 @@
     $reservationDateArray = $reservations->toArray();
     $reservationDateJson = json_encode($reservationDateArray);
     ?>
-
-    ?>
     <div class="container bg-div">
         <h2>Votre réservation pour la chambre "{{ $roomName }}"</h2>
 

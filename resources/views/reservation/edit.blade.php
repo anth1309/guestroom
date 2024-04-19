@@ -65,21 +65,28 @@
                     <div class="form-group">
                         <label for="adults">Nombre d'adultes :</label>
                         <select name="adults" id="adults" class="form-control">
-                            <option value="1" {{ $reservation->adults == 1 ? 'selected' : '' }}>1</option>
-                            <option value="2" {{ $reservation->adults == 2 ? 'selected' : '' }}>2</option>
+                            <option value="1" {{ isset($reservation) && $reservation->adult == 1 ? 'selected' : '' }}>
+                                1</option>
+                            <option value="2" {{ isset($reservation) && $reservation->adult == 2 ? 'selected' : '' }}>
+                                2</option>
                         </select>
+
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="children">Nombre d'enfants (plus de 2 ans) :</label>
                         <select name="children" id="children" class="form-control">
-                            <option value="0" {{ $reservation->children == 0 ? 'selected' : '' }}>0</option>
-                            <option value="1" {{ $reservation->children == 1 ? 'selected' : '' }}>1</option>
-                            <option value="2" {{ $reservation->children == 2 ? 'selected' : '' }}>2</option>
+                            <option value="0"
+                                {{ isset($reservation) && $reservation->children == 0 ? 'selected' : '' }}>0</option>
+                            <option value="1"
+                                {{ isset($reservation) && $reservation->children == 1 ? 'selected' : '' }}>1</option>
+                            <option value="2"
+                                {{ isset($reservation) && $reservation->children == 2 ? 'selected' : '' }}>2</option>
                         </select>
                     </div>
                 </div>
+
             </div>
 
             <div class="row">
@@ -87,8 +94,11 @@
                     <div class="form-group">
                         <label for="bed">Lit parapluie :</label>
                         <select name="bed" id="bed" class="form-control">
-                            <option value="0">Non</option>
-                            <option value="1">Oui</option>
+                            <option value="0" {{ isset($reservation) && $reservation->bed == 0 ? 'selected' : '' }}>
+                                Non</option>
+                            <option value="0" {{ isset($reservation) && $reservation->bed == 1 ? 'selected' : '' }}>
+                                Oui</option>
+
                         </select>
                     </div>
                 </div>

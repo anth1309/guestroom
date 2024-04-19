@@ -1,8 +1,8 @@
 
 import './bootstrap';
-
-import './reservation.js';
 import './price.js';
+import './reservation.js';
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -25,10 +25,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     events: '/get-reservations', 
     editable: true, 
-    eventDrop: function(info) {
-      
+    eventDrop: function(info) { 
         console.log('Event dropped', info);
-    }
+    },
+    eventDidMount: function(info) {
+        if (info.event.extendedProps.isReserved) {
+            info.el.style.backgroundColor = 'red';
+        }
+    },
+
    });
    calendar.render();
 

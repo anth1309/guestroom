@@ -16,7 +16,9 @@
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">Nom de la chambre</th>
-                    <th scope="col"></th>
+                    <th scope="col"><a href="{{ route('rooms.create') }}">Créer une chambre</a></th>
+
+                    </th>
 
                 </tr>
             </thead>

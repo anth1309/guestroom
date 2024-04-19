@@ -1,102 +1,56 @@
 @extends('base')
 
-@section('title', 'Modifier une réservation')
+@section('title', isset($room) ? 'Modifier une chambre' : 'Créer une chambre')
 
 @section('content')
-    <?php
-    
-    ?>
     <div class="container bg-div">
-        <h2>Modifier la reservation n0 de la chambre {{ $reservation->room->name }}</h2>
-        <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
+        <h2>{{ isset($room) ? 'Modifier la chambre ' . $room->name : 'Créer une chambre' }}</h2>
+
+
+        <form action="{{ isset($room) ? route('rooms.update', $room->id) : route('rooms.store') }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="room_id" id="room_id" value="{{ $reservation->room_id }}">
-            @method('PUT')
+            @if (isset($room))
+                @method('PUT')
+            @endif
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="lastname">Nom :</label>
-                        <input type="text" name="lastname" id="lastname" class="form-control" required
-                            placeholder="Votre nom" value="{{ $reservation->lastname }}">
+                        <label for="name">Nom de la chambre :</label>
+                        <input type="text" name="name" id="name" class="form-control"
+                            value="{{ isset($room) ? $room->name : '' }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="capacity">Capacité :</label>
+                        <input type="number" name="capacity" id="capacity" class="form-control"
+                            value="{{ isset($room) ? $room->capacity : '' }}" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="firstname">Prénom :</label>
-                        <input type="text" name="firstname" id="firstname" class="form-control" required
-                            placeholder="Votre prénom" value="{{ $reservation->firstname }}">
+                        <label for="price_weekend">Prix week-end :</label>
+                        <input type="number" name="price_weekend" id="price_weekend" class="form-control"
+                            value="{{ isset($room) ? $room->weekend_price : '' }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price_week">Prix semaine :</label>
+                        <input type="number" name="price_week" id="price_week" class="form-control"
+                            value="{{ isset($room) ? $room->weekly_price : '' }}" required>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="email">Email :</label>
-                        <input type="email" name="email" id="email" class="form-control" required
-                            placeholder="exemple@gmail.com" value="{{ $reservation->email }}">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="phone">Téléphone :</label>
-                        <input type="tel" name="phone" id="phone" class="form-control" required
-                            value="{{ $reservation->phone }}">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="start_date">Date de début :</label>
-                        <input type="date" name="start_date" id="start_date" class="form-control" required
-                            value="{{ $reservation->start_date }}">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="end_date">Date de fin :</label>
-                        <input type="date" name="end_date" id="end_date" class="form-control" required
-                            value="{{ $reservation->end_date }}">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="adults">Nombre d'adultes :</label>
-                        <select name="adults" id="adults" class="form-control">
-                            <option value="1" {{ $reservation->adults == 1 ? 'selected' : '' }}>1</option>
-                            <option value="2" {{ $reservation->adults == 2 ? 'selected' : '' }}>2</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="children">Nombre d'enfants (plus de 2 ans) :</label>
-                        <select name="children" id="children" class="form-control">
-                            <option value="0" {{ $reservation->children == 0 ? 'selected' : '' }}>0</option>
-                            <option value="1" {{ $reservation->children == 1 ? 'selected' : '' }}>1</option>
-                            <option value="2" {{ $reservation->children == 2 ? 'selected' : '' }}>2</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="bed">Lit parapluie :</label>
-                        <select name="bed" id="bed" class="form-control">
-                            <option value="0">Non</option>
-                            <option value="1">Oui</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="images">Images de la chambre :</label>
+                <input type="file" name="images[]" id="images" class="form-control-file" multiple>
             </div>
 
 
-
-            <button type="submit" class="btn  mt-2 mb-2 background text">Enregistrer les modifications</button>
+            <div class="form-group">
+                <label for="description">Description :</label>
+                <textarea name="description" id="description" class="form-control" required>{{ isset($room) ? $room->description : '' }}</textarea>
+            </div>
+            <button type="submit"
+                class="btn  mt-2 mb-2 background text">{{ isset($room) ? 'Enregistrer les modifications' : 'Créer la chambre' }}</button>
         </form>
     </div>
 @endsection

@@ -25,9 +25,9 @@ function calculatePrice() {
 
        var basePrice = (currentDayOfWeek >= 1 && currentDayOfWeek <= 4) ? weekdayBasePrice : weekendBasePrice;
 
-       var additionalPrice = (totalGuests == 3) ? ((currentDayOfWeek >= 1 && currentDayOfWeek <= 4) ? 1500 : 2000) : 0;
+       var additionalPrice = (totalGuests >2) ? ((currentDayOfWeek >= 1 && currentDayOfWeek <= 4) ? 1500 : 2000) : 0;
        
-       if (document.getElementById('bed').value == 2) {
+       if (document.getElementById('bed').value == 1) {
            additionalPrice += 1000; 
        }
 

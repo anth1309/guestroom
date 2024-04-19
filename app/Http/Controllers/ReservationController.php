@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewReservationMail;
 use App\Mail\ReservationMail;
 use App\Mail\TestMail;
 use App\Models\Reservation;
@@ -29,6 +30,7 @@ class ReservationController extends Controller
                     'start' => $startDate->toDateString(),
                     'end' => $startDate->toDateString(),
                     'roomName' => $roomName,
+                    'isReserved' => true,
                 ];
                 $startDate->addDay();
             }
@@ -93,6 +95,7 @@ class ReservationController extends Controller
         $reservation = Reservation::findOrFail($reservationId);
         $mail = $reservation->email;
         Mail::to($mail)->send(new ReservationMail($reservation));
+        Mail::to('admin@example.com')->send(new NewReservationMail($reservation));
 
         return redirect()->route('home')->with('success', 'Votre réservation a été enregistrée avec succès.');
     }
@@ -113,7 +116,6 @@ class ReservationController extends Controller
 
     public function update(Request $request, $id)
     {
-        // \dd('nb d adulte : ' . $request->adults, 'endfante :' . $request->children, "lit : " . $request->bed);
         $request->validate([
             'room_id' => 'required|exists:rooms,id',
             'lastname' => 'required|string|max:255',
@@ -129,7 +131,6 @@ class ReservationController extends Controller
         ]);
 
         $price = $this->calculatePrice($request);
-        // \dd($price);
         $reservation = Reservation::findOrFail($id);
         $reservation->update([
             'room_id' => $request->room_id,
@@ -146,6 +147,15 @@ class ReservationController extends Controller
             'price' => $price,
             'updated_at' => now(),
         ]);
+
+
+        $mailAdmin = new NewReservationMail($reservation);
+        $mailAdmin->updateSubject('Modification de la reservation - ' . $reservation->reservation_number);
+        Mail::to('admin@example.com')->send($mailAdmin);
+
+        $mail = new ReservationMail($reservation);
+        $mail->updateSubject('Modification de votre reservation - ' . $reservation->reservation_number);
+        Mail::to($reservation->email)->send($mail);
 
         return redirect()->route('reservations.index')
             ->with('success', 'La réservation a été mise à jour avec succès.');

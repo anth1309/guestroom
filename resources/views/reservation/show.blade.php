@@ -18,12 +18,12 @@
 
         </div>
         <div>
-            <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-primary">Modifier</a>
-            <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST"
-                style="display: inline-block;">
+            <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-primary  mt-2 mb-2">Modifier</a>
+            <form id="delete-form-{{ $reservation->id }}" action="{{ route('reservations.destroy', $reservation->id) }}"
+                method="POST" style="display: inline-block;">
                 @csrf
                 @method('DELETE')
-                <button type="button" class="btn btn-danger"
+                <button type="button" class="btn btn-danger  mt-2 mb-2"
                     onclick="confirmDelete('{{ $reservation->id }}')">Supprimer</button>
             </form>
         </div>

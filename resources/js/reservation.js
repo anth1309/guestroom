@@ -22,28 +22,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
  
     // Fonction pour vérifier la disponibilité des dates
- 
     function isDateAvailable(startDate, endDate) {
         for (let reservation of reservations) {
-            
             const reservationStartDate = new Date(reservation.start_date);
             const reservationEndDate = new Date(reservation.end_date);
+    
            
-            const reservationStartDateAdjusted = new Date(reservationStartDate);
-            reservationStartDateAdjusted.setDate(reservationStartDateAdjusted.getDate() + 1);
-
-            const reservationEndDateAdjusted = new Date(reservationEndDate);
-            reservationEndDateAdjusted.setDate(reservationEndDateAdjusted.getDate() -1);
-   
-            if (startDate.getTime() >= reservationStartDate.getTime() && startDate.getTime() <= reservationEndDateAdjusted.getTime()) {
+            if ((startDate < reservationEndDate && endDate > reservationStartDate)) {
                 return false; 
             }
-            if (endDate.getTime() >= reservationStartDateAdjusted.getTime() && endDate.getTime() <= reservationEndDate.getTime()) {
-                return false;
-            }
         }
-        return true; 
+        return true;
     }
+    
     
     // Fonction pour vérifier la disponibilité lorsque les dates changent
     function checkAvailability() {
@@ -51,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const endDate = new Date(endDatePicker.value);    
         if (!isDateAvailable(startDate, endDate)) {
             alert("Ces dates ne sont pas disponibles. Veuillez sélectionner d'autres dates.");
+            startDatePicker.value = '';
+            endDatePicker.value = '';
         }
     }
     

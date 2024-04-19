@@ -1,15 +1,18 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Models\Room;
+use App\Models\RoomImage;
 use Illuminate\Support\Facades\Route;
 
 //affiche la page de base
 Route::get('/', function () {
     $rooms = Room::all();
-    return view('home.index', compact('rooms'));
+    $images = RoomImage::all();
+    return view('home.index', compact('rooms', 'images'));
 })->name('home');
 
 //affiche la page prix
@@ -42,6 +45,8 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::delete('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+
+
 //route Crud une fois loggé
 Route::middleware('auth')->group(function () {
     Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
@@ -52,7 +57,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
     Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
+
+    Route::get('/rooms/create/new', [RoomController::class, 'create'])->name('rooms.create');
+    Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
+
     Route::get('/rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
     Route::put('/rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
     Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
+
+    Route::delete('/images/{id}', [ImageController::class, 'destroy'])->name('image.destroy');
 });
