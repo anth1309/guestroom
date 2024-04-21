@@ -27,12 +27,14 @@ function calculatePrice() {
 
        var additionalPrice = (totalGuests >2) ? ((currentDayOfWeek >= 1 && currentDayOfWeek <= 4) ? 1500 : 2000) : 0;
        
-       if (document.getElementById('bed').value == 1) {
-           additionalPrice += 1000; 
-       }
+      
 
        price += basePrice + additionalPrice;
    }
+
+   if (document.getElementById('bed').value == 1) {
+    price += 1000; 
+}
 
    document.getElementById('price').value = price + " XPF";
 }
