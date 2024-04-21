@@ -35,14 +35,13 @@ Vous arrivez directement sur le site
 
 5. acces au site
 
-Admin : [http://localhost:8000/admin-login/gestion'](http://localhost:8000/admin-login/gestion)  
+Admin : [http://localhost:8000/admin-login/gestion'](http://localhost:8000/admin-login/gestion)
+
 user : admingite@example.com  
 mdp : gite
 
-Gite client: [http://localhost:8080](http://localhost:8080)
+Gite client: [http://localhost:8080](http://localhost:8000)
 
 MailHog : [http://localhost:8025](http://localhost:8025)
 
-## le site sera accessible à l'adresse suivante
-
-[http://localhost:8000](http://localhost:8000)
+PhpMyAdmin : [http://localhost:8080](http://localhost:8080)
