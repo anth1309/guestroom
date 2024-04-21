@@ -46,10 +46,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('calendar') }}">Disponibilites</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('login') }}" class="nav-link">Se connecter</a>
-                    </li>
-
                 </ul>
             @else
                 <div class="container">

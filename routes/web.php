@@ -40,12 +40,8 @@ Route::post('/reservations', [ReservationController::class, 'store'])->name('res
 
 
 //route log admin pour la gestion
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/admin-login/gestion', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
-Route::delete('/logout', [LoginController::class, 'logout'])->name('logout');
-
-
-
 
 //route Crud une fois loggé
 Route::middleware('auth')->group(function () {
@@ -66,4 +62,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
 
     Route::delete('/images/{id}', [ImageController::class, 'destroy'])->name('image.destroy');
+
+    Route::delete('/logout', [LoginController::class, 'logout'])->name('logout');
 });

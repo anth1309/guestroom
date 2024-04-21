@@ -1,0 +1,48 @@
+# Documentation du Projet Web : Reservation Gite
+
+Ce document explique les étapes nécessaires pour configurer et exécuter le projet en mode développement.
+
+## Index
+
+-   [Première mise en route](#pmep-1)
+
+## <a name="pmep-1"></a>Première mise en route
+
+1. Copier le fichier api/example.env et personnaliser si besoin
+
+2. Build les images nécessaires,a la racine du projet
+
+```
+docker compose build
+```
+
+3. Lancer le stack
+
+```
+docker compose up -d
+```
+
+4.Installation
+
+sous windows a la racine dans un terminal "bash"  
+sous Mac, terminal classique
+
+```
+bash entrypoint.sh
+```
+
+Vous arrivez directement sur le site
+
+5. acces au site
+
+Admin : [http://localhost:8000/admin-login/gestion'](http://localhost:8000/admin-login/gestion)  
+user : admingite@example.com  
+mdp : gite
+
+Gite client: [http://localhost:8080](http://localhost:8080)
+
+MailHog : [http://localhost:8025](http://localhost:8025)
+
+## le site sera accessible à l'adresse suivante
+
+[http://localhost:8000](http://localhost:8000)
